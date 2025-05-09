@@ -11,7 +11,7 @@ import { projects } from "@cv";
 		{
 			projects.map(({ url, description, highlights, name, isActive, github }) => {
 				return (
-					<div role="contentinfo" class="grid-span-1 ring-skin-muted relative flex flex-col rounded-md bg-skin-button-muted/50 p-5 shadow-sm ring-1">
+					<div role="contentinfo" class="grid-span-1 ring-skin-fill-muted relative flex flex-col rounded-md bg-skin-button-muted/50 p-5 shadow-xs ring-1">
 						<div class="flex items-center justify-between space-x-[10px]">
 							<div class="flex items-center gap-2">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder size-4">
@@ -52,6 +52,7 @@ import { projects } from "@cv";
 </Section>
 
 <style>
+	@reference "@/styles/global.css";
 	ul {
 		@apply ml-4 list-disc space-y-1;
 		li {

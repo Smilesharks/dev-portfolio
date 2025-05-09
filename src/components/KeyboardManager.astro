@@ -1,5 +1,5 @@
 ---
-import "hotkeypad/reset.css";
+// import "hotkeypad/reset.css";
 import "hotkeypad/index.css";
 import { type SocialIcon } from "@/types";
 import { basics } from "@cv";
@@ -137,6 +137,7 @@ const profilesInfo = profiles.map(({ network, url }) => {
 </script>
 
 <style>
+	@reference "@/styles/global.css";
 	@keyframes fadeIn {
 		from {
 			opacity: 0;
@@ -190,7 +191,7 @@ const profilesInfo = profiles.map(({ network, url }) => {
 		animation-range: entry 100% cover 10%;
 	}
 	kbd {
-		@apply bg-skin-muted;
+		@apply bg-skin-fill-muted;
 		border-radius: 4px;
 		padding: 2px 4px;
 		font-size: 12px;

@@ -1,6 +1,7 @@
 ---
 import { basics } from "@cv";
 import Vengeance from "@/layouts/Vengeance.astro";
+import "@/styles/global.css";
 
 interface Props {
 	title: string;
@@ -10,6 +11,7 @@ const { title } = Astro.props;
 
 const { image, summary, url, theme } = basics;
 ---
+
 
 <!doctype html>
 <html lang="en">
@@ -45,6 +47,8 @@ const { image, summary, url, theme } = basics;
 		</div>
 		<slot />
 		<style is:global>
+			@reference "@/styles/global.css";
+
 			body,
 			figure {
 				margin: 0;
@@ -55,11 +59,11 @@ const { image, summary, url, theme } = basics;
 				text-decoration: none;
 			}
 
-			ul {
+			/* ul {
 				list-style: none;
 				margin: 0;
 				padding: 0;
-			}
+			} */
 
 			*,
 			*::before,
@@ -87,11 +91,11 @@ const { image, summary, url, theme } = basics;
 					sans-serif;
 			}
 
-			p {
+			/* p {
 				@apply text-sm text-skin-muted;
 				line-height: 1.5;
 				text-wrap: pretty;
-			}
+			} */
 
 			.print {
 				display: none !important;
