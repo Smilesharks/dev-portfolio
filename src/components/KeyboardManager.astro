@@ -1,5 +1,6 @@
 ---
-import "hotkeypad/reset.css";
+// NOTE: Removed "hotkeypad/reset.css" - its aggressive reset (all: unset; display: revert)
+// breaks Tailwind CSS v4 because it's outside @layer and overrides utilities
 import "hotkeypad/index.css";
 import { type SocialIcon } from "@/types";
 import { basics } from "@cv";
