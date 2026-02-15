@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+/*
+ * Tailwind CSS 4 - Dynamic Theme System
+ * Using @theme inline for runtime CSS variable resolution
+ */
+
+/* Define skin colors as theme tokens that reference CSS variables */
+@theme inline {
+  --color-skin-base: var(--color-text-base);
+  --color-skin-muted: var(--color-text-muted);
+  --color-skin-inverted: var(--color-text-inverted);
+  --color-skin-fill: var(--color-fill);
+  --color-skin-hue: var(--color-accent);
+  --color-skin-hues: var(--color-accent);
+  --color-skin-button-accent: var(--color-button-accent);
+  --color-skin-button-accent-hover: var(--color-button-accent-hover);
+  --color-skin-button-muted: var(--color-button-muted);
+}
+
+/* ============================================
+   LIGHT MODE - Default Theme
+   ============================================ */
+:root {
+  --color-text-base: #000000;
+  --color-text-muted: #787878;
+  --color-text-inverted: #ffffff;
+  --color-fill: #f5f5f5;
+  --color-muted: #c8c8c8;
+  --color-accent: #f97316;
+  --color-button-accent: #f97316;
+  --color-button-accent-hover: #373737;
+  --color-button-muted: #f4efee;
+}
+
+/* Blue Theme - Light */
+:root [data-theme="blue"] {
+  --color-text-base: #0f172a;
+  --color-text-muted: #64748b;
+  --color-text-inverted: #f0f0f0;
+  --color-fill: #cbd5e1;
+  --color-muted: #94a3b8;
+  --color-accent: #3b82f6;
+  --color-button-accent: #3b82f6;
+  --color-button-accent-hover: #00b9ff;
+  --color-button-muted: #e2e8f0;
+}
+
+/* Red Theme - Light */
+:root [data-theme="red"] {
+  --color-text-base: #1c1917;
+  --color-text-muted: #646464;
+  --color-text-inverted: #f5f5f5;
+  --color-fill: #e7e5e4;
+  --color-muted: #dcdcdc;
+  --color-accent: #ef4444;
+  --color-button-accent: #ef4444;
+  --color-button-accent-hover: #dc3246;
+  --color-button-muted: #f5f5f5;
+}
+
+/* Green Theme - Light */
+:root [data-theme="green"] {
+  --color-text-base: #282828;
+  --color-text-muted: #6e6e6e;
+  --color-text-inverted: #e6e6e6;
+  --color-fill: #ecfccb;
+  --color-muted: #bddc93;
+  --color-accent: #65a30d;
+  --color-button-accent: #65a30d;
+  --color-button-accent-hover: #78dc78;
+  --color-button-muted: #d3ebad;
+}
+
+/* Cyber Theme - Light */
+:root [data-theme="cyber"] {
+  --color-text-base: #0f0f0f;
+  --color-text-muted: #908705;
+  --color-text-inverted: #f0f0f0;
+  --color-fill: #fcff40;
+  --color-muted: #323232;
+  --color-accent: #eb152b;
+  --color-button-accent: #eb152b;
+  --color-button-accent-hover: #00b9ff;
+  --color-button-muted: #f9ef06;
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+.dark {
+  --color-text-base: #ffffff;
+  --color-text-muted: #969696;
+  --color-text-inverted: #ffffff;
+  --color-fill: #121212;
+  --color-muted: #242424;
+  --color-accent: #e34d0a;
+  --color-button-accent: #e34d0a;
+  --color-button-accent-hover: #e7792b;
+  --color-button-muted: #1a1a1a;
+}
+
+/* Blue Theme - Dark */
+.dark [data-theme="blue"] {
+  --color-text-base: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-text-inverted: #f0f0f0;
+  --color-fill: #020617;
+  --color-muted: #334155;
+  --color-accent: #3b82f6;
+  --color-button-accent: #3b82f6;
+  --color-button-accent-hover: #00b9ff;
+  --color-button-muted: #1e293b;
+}
+
+/* Red Theme - Dark */
+.dark [data-theme="red"] {
+  --color-text-base: #e7e5e4;
+  --color-text-muted: #a8a29e;
+  --color-text-inverted: #f5f5f5;
+  --color-fill: #1c1917;
+  --color-muted: #2d2d2d;
+  --color-accent: #f87171;
+  --color-button-accent: #f87171;
+  --color-button-accent-hover: #dc3246;
+  --color-button-muted: #78716c;
+}
+
+/* Green Theme - Dark */
+.dark [data-theme="green"] {
+  --color-text-base: #e6e6e6;
+  --color-text-muted: #687c68;
+  --color-text-inverted: #e6e6e6;
+  --color-fill: #0a140a;
+  --color-muted: #364036;
+  --color-accent: #84cc16;
+  --color-button-accent: #84cc16;
+  --color-button-accent-hover: #78dc78;
+  --color-button-muted: #222c22;
+}
+
+/* Cyber Theme - Dark */
+.dark [data-theme="cyber"] {
+  --color-text-base: #fcff40;
+  --color-text-muted: #7d7d7d;
+  --color-text-inverted: #f0f0f0;
+  --color-fill: #0f0f0f;
+  --color-muted: #323232;
+  --color-accent: #5aedfb;
+  --color-button-accent: #5aedfb;
+  --color-button-accent-hover: #00b9ff;
+  --color-button-muted: #195156;
+}

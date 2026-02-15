@@ -174,7 +174,7 @@ const profilesInfo = profiles.map(({ network, url }) => {
 	}
 
 	footer {
-		@apply bg-skin-button-accent;
+		background-color: var(--color-button-accent);
 		position: fixed;
 		bottom: 0px;
 		width: 100%;
@@ -189,28 +189,33 @@ const profilesInfo = profiles.map(({ network, url }) => {
 		animation-timeline: --revealing;
 		animation-range: entry 100% cover 10%;
 	}
+
 	kbd {
-		@apply bg-skin-muted;
+		background-color: var(--color-muted);
 		border-radius: 4px;
 		padding: 2px 4px;
 		font-size: 12px;
 	}
+
 	#hotkeypad {
-		--hotkeypad-bg-kbd: rgb(var(--muted));
-		--hotkeypad-bg-backdrop: rgb(var(--color-fill));
-		--hotkeypad-bg-container: rgb(var(--color-fill));
-		--hotkeypad-bg-item-hover: rgba(var(--color-text), 20%);
-		--hotkeypad-border-container: rgb(var(--muted));
-		--hotkeypad-border-container-hover: rgb(var(--color-fill));
-		--hotkeypad-fg-muted: rgb(var(--muted));
-		@media (prefers-color-scheme: dark) {
-			--hotkeypad-bg-kbd: rgb(var(--muted));
-			--hotkeypad-bg-backdrop: rgb(var(--color-fill));
-			--hotkeypad-bg-container: rgb(var(--color-fill));
-			--hotkeypad-bg-item-hover: rgba(var(--color), 10%);
-			--hotkeypad-border-container: rgb(var(--muted));
-			--hotkeypad-border-container-hover: rgb(var(--color-fill));
-			--hotkeypad-fg-muted: rgb(var(--color-text-base));
+		--hotkeypad-bg-kbd: var(--color-muted);
+		--hotkeypad-bg-backdrop: var(--color-fill);
+		--hotkeypad-bg-container: var(--color-fill);
+		--hotkeypad-bg-item-hover: color-mix(in srgb, var(--color-text-base) 20%, transparent);
+		--hotkeypad-border-container: var(--color-muted);
+		--hotkeypad-border-container-hover: var(--color-fill);
+		--hotkeypad-fg-muted: var(--color-muted);
+	}
+
+	@media (prefers-color-scheme: dark) {
+		#hotkeypad {
+			--hotkeypad-bg-kbd: var(--color-muted);
+			--hotkeypad-bg-backdrop: var(--color-fill);
+			--hotkeypad-bg-container: var(--color-fill);
+			--hotkeypad-bg-item-hover: color-mix(in srgb, var(--color-accent) 10%, transparent);
+			--hotkeypad-border-container: var(--color-muted);
+			--hotkeypad-border-container-hover: var(--color-fill);
+			--hotkeypad-fg-muted: var(--color-text-base);
 		}
 	}
 </style>
