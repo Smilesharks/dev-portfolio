@@ -1,8 +1,15 @@
 ---
-const { className, title } = Astro.props;
+interface Props {
+	className?: string;
+	title?: string;
+	headingLevel?: 'h2' | 'h3';
+}
+
+const { className, title, headingLevel = 'h2' } = Astro.props;
+const HeadingTag = headingLevel;
 ---
 
 <section class:list={["flex flex-col gap-4 print:gap-0", className]}>
-	{title && <h3 class="relative flex w-full items-center gap-3 pb-4 text-3xl print:gap-1 print:pb-0 print:text-xl">{title}</h3>}
+	{title && <HeadingTag class="relative flex w-full items-center gap-3 pb-4 text-2xl font-semibold print:gap-1 print:pb-0 print:text-xl">{title}</HeadingTag>}
 	<slot />
 </section>

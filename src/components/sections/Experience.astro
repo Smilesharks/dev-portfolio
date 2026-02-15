@@ -51,7 +51,7 @@ const SKILLS_ICONS: Record<string, any> = {
             <div class="relative flex flex-col pb-6 print:pb-0 before:-ml-6 sm:col-span-10 before:w-px print:before:hidden before:absolute before:bg-skin-muted before:h-full before:mt-2">
             <div class="absolute w-2 h-2 bg-skin-muted rounded-full mt-2 -translate-x-[1.71rem] ring print:hidden ring-skin-fill"></div>
               <h3>
-                <div class="inline-flex items-center text-lg print:text-base leading-tight group/link focus-visible:text-amber-500" aria-label="{position} - {company}">
+                <div class="inline-flex items-center text-lg print:text-base leading-tight group/link focus-visible:text-amber-500" aria-label={`${position} at ${name}`}>
                   <span>{position} <span>@</span> 
                   {url ? (
                     <a class="text-skin-hue" href={url} title={`Ver ${name}`} target="_blank">{name}</a>

@@ -8,7 +8,21 @@ interface Props {
 
 const { title } = Astro.props;
 
-const { image, summary, url, theme } = basics;
+const { name, image, summary, url, theme, profiles } = basics;
+
+// Generate OG image URL (fallback to profile image if no dedicated OG image)
+const ogImage = image.startsWith('http') ? image : `${url}${image}`;
+
+// Generate JSON-LD structured data for Person
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	"name": name,
+	"url": url,
+	"image": ogImage,
+	"description": summary,
+	"sameAs": profiles?.map((p: { url: string }) => p.url) ?? []
+};
 ---
 
 <!doctype html>
@@ -18,23 +32,36 @@ const { image, summary, url, theme } = basics;
 		<title>{title}</title>
 		<meta name="description" content={summary} />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="color-scheme" content="light dark" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="canonical" href={url} />
 		<link rel="preload" as="image" href={image} />
 
+		<!-- Preconnect to external domains -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+
+		<!-- Open Graph -->
 		<meta property="og:url" content={url} />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={summary} />
-		<meta property="og:image" content="" />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:site_name" content={name} />
 
+		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta property="twitter:domain" content={url.split("//")[1] ?? ""} />
 		<meta property="twitter:url" content={url} />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={summary} />
-		<meta name="twitter:image" content="" />
+		<meta name="twitter:image" content={ogImage} />
 
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Itim" />
+		<!-- JSON-LD Structured Data -->
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Itim&display=swap" />
 
 		<link rel="stylesheet" href="/themes/themes.css" />
 		<Vengeance />
@@ -119,6 +146,23 @@ const { image, summary, url, theme } = basics;
 
 				article {
 					break-inside: avoid;
+				}
+
+				/* Force light mode when printing */
+				html {
+					color-scheme: light !important;
+				}
+			}
+
+			/* Respect user's motion preferences */
+			@media (prefers-reduced-motion: reduce) {
+				*,
+				*::before,
+				*::after {
+					animation-duration: 0.01ms !important;
+					animation-iteration-count: 1 !important;
+					transition-duration: 0.01ms !important;
+					scroll-behavior: auto !important;
 				}
 			}
 		</style>
