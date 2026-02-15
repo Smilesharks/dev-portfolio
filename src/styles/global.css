@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+/* Theme configuration for Tailwind 4 - Custom skin colors */
+@theme {
+  --color-skin-base: rgb(var(--color-text-base));
+  --color-skin-muted: rgb(var(--color-text-muted));
+  --color-skin-inverted: rgb(var(--color-text-inverted));
+  --color-skin-fill: rgb(var(--color-fill));
+  --color-skin-hue: rgb(var(--color));
+  --color-skin-muted-bg: rgb(var(--muted));
+  --color-skin-button-accent: rgb(var(--color-button-accent));
+  --color-skin-button-accent-hover: rgb(var(--color-button-accent-hover));
+  --color-skin-button-muted: rgb(var(--color-button-muted));
+}
+
+/* Theme variables - Light mode (default) */
+:root {
+  --color-text-base: 0, 0, 0;
+  --color-text-muted: 120, 120, 120;
+  --color-text-inverted: 255, 255, 255;
+  --color-fill: 245, 245, 245;
+  --muted: 200, 200, 200;
+  --color: 249, 115, 22;
+  --color-button-accent: 249, 115, 22;
+  --color-button-accent-hover: 55, 55, 55;
+  --color-button-muted: 244, 239, 238;
+}
+
+:root [data-theme="blue"] {
+  --color-text-base: 15, 23, 42;
+  --color-text-muted: 100, 116, 139;
+  --color-text-inverted: 240, 240, 240;
+  --color-fill: 203, 213, 225;
+  --muted: 148, 163, 184;
+  --color: 59, 130, 246;
+  --color-button-accent: 59, 130, 246;
+  --color-button-accent-hover: 0, 185, 255;
+  --color-button-muted: 226, 232, 240;
+}
+
+:root [data-theme="red"] {
+  --color-text-base: 28, 25, 23;
+  --color-text-muted: 100, 100, 100;
+  --color-text-inverted: 245, 245, 245;
+  --color-fill: 231, 229, 228;
+  --muted: 220, 220, 220;
+  --color: 239, 68, 68;
+  --color-button-accent: 239, 68, 68;
+  --color-button-accent-hover: 220, 50, 70;
+  --color-button-muted: 245, 245, 245;
+}
+
+:root [data-theme="green"] {
+  --color-text-base: 40, 40, 40;
+  --color-text-muted: 110, 110, 110;
+  --color-text-inverted: 230, 230, 230;
+  --color-fill: 236, 252, 203;
+  --muted: 189, 220, 147;
+  --color: 101, 163, 13;
+  --color-button-accent: 101, 163, 13;
+  --color-button-accent-hover: 120, 220, 120;
+  --color-button-muted: 211, 235, 173;
+}
+
+:root [data-theme="cyber"] {
+  --color-text-base: 15, 15, 15;
+  --color-text-muted: 144, 135, 5;
+  --color-text-inverted: 240, 240, 240;
+  --color-fill: 252, 255, 64;
+  --muted: 50, 50, 50;
+  --color: 235, 21, 43;
+  --color-button-accent: 235, 21, 43;
+  --color-button-accent-hover: 0, 185, 255;
+  --color-button-muted: 249, 239, 6;
+}
+
+/* Dark mode */
+.dark {
+  --color-text-base: 255, 255, 255;
+  --color-text-muted: 150, 150, 150;
+  --color-text-inverted: 255, 255, 255;
+  --color-fill: 18, 18, 18;
+  --muted: 36, 36, 36;
+  --color: 227, 77, 10;
+  --color-button-accent: 227, 77, 10;
+  --color-button-accent-hover: 231, 121, 43;
+  --color-button-muted: 26, 26, 26;
+}
+
+.dark [data-theme="blue"] {
+  --color-text-base: 248, 250, 252;
+  --color-text-muted: 148, 163, 184;
+  --color-text-inverted: 240, 240, 240;
+  --color-fill: 2, 6, 23;
+  --muted: 51, 65, 85;
+  --color: 59, 130, 246;
+  --color-button-accent: 59, 130, 246;
+  --color-button-accent-hover: 0, 185, 255;
+  --color-button-muted: 30, 41, 59;
+}
+
+.dark [data-theme="red"] {
+  --color-text-base: 231, 229, 228;
+  --color-text-muted: 168, 162, 158;
+  --color-text-inverted: 245, 245, 245;
+  --color-fill: 28, 25, 23;
+  --muted: 45, 45, 45;
+  --color: 248, 113, 113;
+  --color-button-accent: 248, 113, 113;
+  --color-button-accent-hover: 220, 50, 70;
+  --color-button-muted: 120, 113, 108;
+}
+
+.dark [data-theme="green"] {
+  --color-text-base: 230, 230, 230;
+  --color-text-muted: 104, 124, 104;
+  --color-text-inverted: 230, 230, 230;
+  --color-fill: 10, 20, 10;
+  --muted: 54, 64, 54;
+  --color: 132, 204, 22;
+  --color-button-accent: 132, 204, 22;
+  --color-button-accent-hover: 120, 220, 120;
+  --color-button-muted: 34, 44, 34;
+}
+
+.dark [data-theme="cyber"] {
+  --color-text-base: 252, 255, 64;
+  --color-text-muted: 125, 125, 125;
+  --color-text-inverted: 240, 240, 240;
+  --color-fill: 15, 15, 15;
+  --muted: 50, 50, 50;
+  --color: 90, 237, 251;
+  --color-button-accent: 90, 237, 251;
+  --color-button-accent-hover: 0, 185, 255;
+  --color-button-muted: 25, 81, 86;
+}
+
+/* Custom utility classes for skin colors - Tailwind 4 @utility syntax */
+@utility text-skin-base {
+  color: rgb(var(--color-text-base));
+}
+
+@utility text-skin-muted {
+  color: rgb(var(--color-text-muted));
+}
+
+@utility text-skin-inverted {
+  color: rgb(var(--color-text-inverted));
+}
+
+@utility text-skin-hue {
+  color: rgb(var(--color));
+}
+
+@utility bg-skin-fill {
+  background-color: rgb(var(--color-fill));
+}
+
+@utility bg-skin-muted {
+  background-color: rgb(var(--muted));
+}
+
+@utility bg-skin-button-accent {
+  background-color: rgb(var(--color-button-accent));
+}
+
+@utility bg-skin-button-accent-hover {
+  background-color: rgb(var(--color-button-accent-hover));
+}
+
+@utility bg-skin-button-muted {
+  background-color: rgb(var(--color-button-muted));
+}
+
+@utility bg-skin-hue {
+  background-color: rgb(var(--color));
+}
+
+@utility border-skin-hue {
+  border-color: rgb(var(--color));
+}
+
+@utility ring-skin-fill {
+  --tw-ring-color: rgb(var(--color-fill));
+}
+
+@utility from-skin-hue {
+  --tw-gradient-from: rgb(var(--color-fill)) var(--tw-gradient-from-position);
+}
