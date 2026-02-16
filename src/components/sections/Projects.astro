@@ -53,10 +53,16 @@ import { projects } from "@cv";
 
 <style>
 	ul {
-		@apply ml-4 list-disc space-y-1;
-		li {
-			@apply text-skin-muted;
-		}
+		margin-left: 1rem;
+		list-style-type: disc;
+	}
+
+	ul > * + * {
+		margin-top: 0.25rem;
+	}
+
+	ul li {
+		color: var(--color-text-muted);
 	}
 
 	footer {
@@ -74,6 +80,7 @@ import { projects } from "@cv";
 		font-weight: 500;
 		padding: 0.2rem 0.6rem;
 	}
+
 	@keyframes flicker {
 		0% {
 			opacity: 1;

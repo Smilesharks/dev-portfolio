@@ -1,55 +1,123 @@
 ---
-import Theme from "@/icons/themeSwitch.astro";
+const themes = [
+	{ value: "system", label: "System", icon: "computer" },
+	{ value: "light", label: "Light", icon: "sun" },
+	{ value: "dark", label: "Dark", icon: "moon" },
+];
 ---
 
-<div class="no-print inline-flex items-center">
-	<!-- <div class="flex items-center gap-1">
-		<Theme />
-		<select name="themeSwitch" id="themeSwitch" class="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 dark:text-gray-100 dark:ring-gray-700 sm:text-sm sm:leading-6">
-			<option value="system">System</option>
-			<option value="dark">Dark</option>
-			<option value="light">Light</option>
-		</select>
-	</div> -->
+<div class="no-print relative inline-block text-left" x-data="themeSelector()" x-init="init()">
+	<button
+		type="button"
+		class="group inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-skin-base ring-1 ring-skin-muted transition-all hover:ring-skin-hue focus:outline-none focus:ring-2 focus:ring-skin-hue"
+		@click="open = !open"
+		@keydown.escape.window="open = false"
+		aria-haspopup="listbox"
+		:aria-expanded="open"
+	>
+		<span class="theme-icon transition-transform duration-300 ease-in-out group-hover:scale-105" :class="{ 'scale-105': open }">
+			<!-- Sun icon -->
+			<svg x-show="currentTheme === 'light'" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<circle cx="12" cy="12" r="4"></circle>
+				<path d="M12 2v2"></path>
+				<path d="M12 20v2"></path>
+				<path d="m4.93 4.93 1.41 1.41"></path>
+				<path d="m17.66 17.66 1.41 1.41"></path>
+				<path d="M2 12h2"></path>
+				<path d="M20 12h2"></path>
+				<path d="m6.34 17.66-1.41 1.41"></path>
+				<path d="m19.07 4.93-1.41 1.41"></path>
+			</svg>
+			<!-- Moon icon -->
+			<svg x-show="currentTheme === 'dark'" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+			</svg>
+			<!-- System icon -->
+			<svg x-show="currentTheme === 'system'" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<rect width="20" height="14" x="2" y="3" rx="2"></rect>
+				<line x1="8" x2="16" y1="21" y2="21"></line>
+				<line x1="12" x2="12" y1="17" y2="21"></line>
+			</svg>
+		</span>
+		<span x-text="themes.find(t => t.value === currentTheme)?.label" class="hidden sm:inline"></span>
+		<svg class="h-4 w-4 transition-transform duration-200" :class="{ 'rotate-180': open }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+			<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+		</svg>
+	</button>
 
-	<div class="group/theme flex items-center gap-2">
-		<label for="themeSwitch" class="flex items-center gap-1 text-sm font-medium leading-6 text-skin-base transition-transform ease-in-out group-hover/theme:rotate-45"> <Theme /></label>
-		<select id="themeSwitch" name="themeSwitch" class="focus:ring-skin-hue ring-skin-muted block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-skin-base ring-1 ring-inset focus:ring-2 sm:text-sm sm:leading-6">
-			<option value="system">System</option>
-			<option value="dark">Dark</option>
-			<option value="light">Light</option>
-		</select>
+	<div
+		x-show="open"
+		x-transition:enter="transition ease-out duration-100"
+		x-transition:enter-start="transform opacity-0 scale-95"
+		x-transition:enter-end="transform opacity-100 scale-100"
+		x-transition:leave="transition ease-in duration-75"
+		x-transition:leave-start="transform opacity-100 scale-100"
+		x-transition:leave-end="transform opacity-0 scale-95"
+		@click.away="open = false"
+		class="absolute left-0 z-50 mt-2 w-40 origin-top-left rounded-lg bg-skin-fill shadow-lg ring-1 ring-skin-muted focus:outline-none"
+		role="listbox"
+		x-cloak
+	>
+		<div class="py-1">
+			{themes.map((theme) => (
+				<button
+					type="button"
+					class="group flex w-full items-center gap-3 px-4 py-2 text-sm text-skin-base transition-colors hover:bg-skin-button-muted"
+					:class={`{ 'bg-skin-button-muted text-skin-hue': currentTheme === '${theme.value}' }`}
+					@click={`selectTheme('${theme.value}')`}
+					role="option"
+					:aria-selected={`currentTheme === '${theme.value}'`}
+				>
+					<span class="flex h-5 w-5 items-center justify-center transition-transform duration-200 group-hover:scale-110">
+						{theme.icon === "sun" && (
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<circle cx="12" cy="12" r="4"></circle>
+								<path d="M12 2v2"></path>
+								<path d="M12 20v2"></path>
+								<path d="m4.93 4.93 1.41 1.41"></path>
+								<path d="m17.66 17.66 1.41 1.41"></path>
+								<path d="M2 12h2"></path>
+								<path d="M20 12h2"></path>
+								<path d="m6.34 17.66-1.41 1.41"></path>
+								<path d="m19.07 4.93-1.41 1.41"></path>
+							</svg>
+						)}
+						{theme.icon === "moon" && (
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+							</svg>
+						)}
+						{theme.icon === "computer" && (
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<rect width="20" height="14" x="2" y="3" rx="2"></rect>
+								<line x1="8" x2="16" y1="21" y2="21"></line>
+								<line x1="12" x2="12" y1="17" y2="21"></line>
+							</svg>
+						)}
+					</span>
+					<span>{theme.label}</span>
+					<svg
+						x-show={`currentTheme === '${theme.value}'`}
+						class="ml-auto h-4 w-4 text-skin-hue"
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						x-cloak
+					>
+						<path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
+					</svg>
+				</button>
+			))}
+		</div>
 	</div>
-
-	<style>
-		:global(.dark) {
-			color-scheme: dark;
-		}
-	</style>
-
-	<script>
-		const select = document.getElementById("themeSwitch") as HTMLSelectElement;
-		const theme = localStorage.getItem("theme");
-		const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-
-		if (theme !== null) {
-			select.value = theme;
-		} else {
-			select.value = systemTheme;
-		}
-
-		function updateTheme(value: string) {
-			const theme = value === "system" ? systemTheme : value;
-			document.documentElement.classList.remove("light", "dark");
-			document.documentElement.classList.add(theme);
-			localStorage.setItem("theme", value);
-		}
-
-		updateTheme(select.value);
-
-		select.addEventListener("change", (event: Event) => {
-			const select = event.target as HTMLSelectElement;
-			updateTheme(select.value);
-		});
-	</script>
 </div>
+
+<style>
+	:global(.dark) {
+		color-scheme: dark;
+	}
+
+	[x-cloak] {
+		display: none !important;
+	}
+</style>

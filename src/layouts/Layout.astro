@@ -1,6 +1,7 @@
 ---
 import { basics } from "@cv";
 import Vengeance from "@/layouts/Vengeance.astro";
+import "@/styles/global.css";
 
 interface Props {
 	title: string;
@@ -36,7 +37,6 @@ const { image, summary, url, theme } = basics;
 
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Itim" />
 
-		<link rel="stylesheet" href="/themes/themes.css" />
 		<Vengeance />
 	</head>
 	<body data-theme={theme} class="relative bg-skin-fill">
@@ -71,7 +71,7 @@ const { image, summary, url, theme } = basics;
 			h2,
 			h3,
 			h4 {
-				@apply text-skin-base;
+				color: var(--color-text-base);
 				margin: 0;
 				font-family:
 					system-ui,
@@ -88,7 +88,9 @@ const { image, summary, url, theme } = basics;
 			}
 
 			p {
-				@apply text-sm text-skin-muted;
+				font-size: 0.875rem;
+				line-height: 1.25rem;
+				color: var(--color-text-muted);
 				line-height: 1.5;
 				text-wrap: pretty;
 			}
@@ -98,10 +100,13 @@ const { image, summary, url, theme } = basics;
 			}
 
 			.dev * {
-				@apply border border-red-500/50 bg-red-500/5;
+				border: 1px solid rgb(239 68 68 / 0.5);
+				background-color: rgb(239 68 68 / 0.05);
 			}
+
 			#hotkeypad [data-backdrop] {
-				@apply !bg-zinc-800 !opacity-80;
+				background-color: rgb(39 39 42) !important;
+				opacity: 0.8 !important;
 			}
 
 			@media print {
@@ -122,5 +127,56 @@ const { image, summary, url, theme } = basics;
 				}
 			}
 		</style>
+
+		<script>
+			import Alpine from "alpinejs";
+			import collapse from "@alpinejs/collapse";
+
+			Alpine.plugin(collapse);
+
+			// Theme selector component
+			Alpine.data("themeSelector", () => ({
+				open: false,
+				currentTheme: "system",
+				themes: [
+					{ value: "system", label: "System", icon: "computer" },
+					{ value: "light", label: "Light", icon: "sun" },
+					{ value: "dark", label: "Dark", icon: "moon" },
+				],
+
+				init() {
+					const savedTheme = localStorage.getItem("theme");
+					this.currentTheme = savedTheme || "system";
+					this.applyTheme(this.currentTheme);
+
+					window
+						.matchMedia("(prefers-color-scheme: dark)")
+						.addEventListener("change", () => {
+							if (this.currentTheme === "system") {
+								this.applyTheme("system");
+							}
+						});
+				},
+
+				selectTheme(value: string) {
+					this.currentTheme = value;
+					this.applyTheme(value);
+					localStorage.setItem("theme", value);
+					this.open = false;
+				},
+
+				applyTheme(value: string) {
+					const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+						.matches
+						? "dark"
+						: "light";
+					const theme = value === "system" ? systemTheme : value;
+					document.documentElement.classList.remove("light", "dark");
+					document.documentElement.classList.add(theme);
+				},
+			}));
+
+			Alpine.start();
+		</script>
 	</body>
 </html>

@@ -9,11 +9,22 @@
 ![GitHub forks](https://img.shields.io/github/forks/Smilesharks/dev-portfolio)
 ![GitHub PRs](https://img.shields.io/github/issues-pr/Smilesharks/dev-portfolio)
 
+## ✨ Features
+
+- **Print-friendly** - Optimised layout for PDF export and printing
+- **Dark/Light mode** - System preference detection with manual override
+- **5 Colour themes** - Default, blue, red, green, and cyber themes
+- **Keyboard shortcuts** - Command palette with `Cmd/Ctrl + K`
+- **Responsive design** - Mobile-first approach with Tailwind CSS 4
+- **JSON-based content** - Easy content management via `cv.json`
+
 ## 🛠️ Stack
 
 - [**Astro**](https://astro.build/) - The next-gen web framework.
+- [**Tailwind CSS 4**](https://tailwindcss.com/) - A utility-first CSS framework with CSS-first configuration.
+- [**Alpine.js**](https://alpinejs.dev/) - Lightweight JavaScript framework for composing behaviour.
 - [**Typescript**](https://www.typescriptlang.org/) - JavaScript with type syntax.
-- [**Ninja Keys**](https://github.com/ssleptsov/ninja-keys) - Dropdown menu with keyboard shortcuts made in pure JavaScript.
+- [**HotKeyPad**](https://github.com/nicosommi/hotkeypad) - Command palette with keyboard shortcuts.
 
 ## 🚀 Getting Started
 
@@ -45,7 +56,22 @@ pnpm dev
 1. Open [**http://localhost:4321**](http://localhost:4321/) in your browser to view the result 🚀
 
 ### 4. Customisable colours:
-Change the data-theme of `cv.json` and choose one of the colour themes defined in theme.css, red, blue, green, cyber and default, with its variants in dark mode, or create your own.
+
+Change the `theme` property in `cv.json` and choose one of the available colour themes:
+
+| Theme | Description |
+|-------|-------------|
+| `default` | Orange accent (default) |
+| `blue` | Blue/slate accent |
+| `red` | Red/stone accent |
+| `green` | Lime/green accent |
+| `cyber` | Yellow/cyan cyberpunk style |
+
+Each theme includes light and dark mode variants. The theme selector dropdown allows users to switch between light, dark, and system preference.
+
+**Creating custom themes:**
+
+Edit `src/styles/global.css` and add your theme variables under the appropriate selectors (`:root [data-theme="your-theme"]` for light mode, `.dark [data-theme="your-theme"]` for dark mode).
 
 ## 🧞 Commands
 
