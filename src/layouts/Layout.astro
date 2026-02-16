@@ -127,5 +127,56 @@ const { image, summary, url, theme } = basics;
 				}
 			}
 		</style>
+
+		<script>
+			import Alpine from "alpinejs";
+			import collapse from "@alpinejs/collapse";
+
+			Alpine.plugin(collapse);
+
+			// Theme selector component
+			Alpine.data("themeSelector", () => ({
+				open: false,
+				currentTheme: "system",
+				themes: [
+					{ value: "system", label: "System", icon: "computer" },
+					{ value: "light", label: "Light", icon: "sun" },
+					{ value: "dark", label: "Dark", icon: "moon" },
+				],
+
+				init() {
+					const savedTheme = localStorage.getItem("theme");
+					this.currentTheme = savedTheme || "system";
+					this.applyTheme(this.currentTheme);
+
+					window
+						.matchMedia("(prefers-color-scheme: dark)")
+						.addEventListener("change", () => {
+							if (this.currentTheme === "system") {
+								this.applyTheme("system");
+							}
+						});
+				},
+
+				selectTheme(value: string) {
+					this.currentTheme = value;
+					this.applyTheme(value);
+					localStorage.setItem("theme", value);
+					this.open = false;
+				},
+
+				applyTheme(value: string) {
+					const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+						.matches
+						? "dark"
+						: "light";
+					const theme = value === "system" ? systemTheme : value;
+					document.documentElement.classList.remove("light", "dark");
+					document.documentElement.classList.add(theme);
+				},
+			}));
+
+			Alpine.start();
+		</script>
 	</body>
 </html>
